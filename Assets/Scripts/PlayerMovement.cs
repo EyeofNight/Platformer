@@ -21,16 +21,31 @@ public class PlayerMovement : MonoBehaviour {
         if (controller.isGrounded)
         {
             doubleJump = false;
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
-
-            if (Input.GetButton("Sprint"))
-            {
-                moveDirection *= (moveSpeed * sprintMulti);
-            }
-            else
-                moveDirection *= moveSpeed;
+            
             if (Input.GetButtonDown("Jump"))
                 moveDirection.y = jumpStrength;
+            if (Input.GetAxis("Vertical") < 0)
+            {
+                //Animator State Change
+                if (Input.GetButton("Sprint"))
+                {
+                    //Animation
+
+                }
+                else
+                    moveDirection *= 0.9f*Time.deltaTime;
+
+            }else
+            {
+                moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+
+                if (Input.GetButton("Sprint"))
+                {
+                    moveDirection *= (moveSpeed * sprintMulti);
+                }
+                else
+                    moveDirection *= moveSpeed;
+            }
         }
         else
         {
