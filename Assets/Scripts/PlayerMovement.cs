@@ -54,8 +54,11 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnControllerColliderHit(ControllerColliderHit col)
     {
-        if (col.gameObject.tag == "FailCollider")
+        if (col.gameObject.tag == "Hazard")
             transform.position = new Vector3(0, 1, 0);
+        if (col.gameObject.tag == "WinCollider")
+            transform.position = new Vector3(0, 1, 0); //Need to change scenes later. Might attach a scenemanager to this or the finish line.
+
     }
 
 }
