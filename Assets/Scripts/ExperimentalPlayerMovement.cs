@@ -51,6 +51,14 @@ public class ExperimentalPlayerMovement : MonoBehaviour {
         }
     }
 
+    void WallJump(int dir)
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb.AddForce(.5f * jumpStr * dir, .7f * jumpStr, 0);
+        }
+    }
+
     void Movement()
     {
         if (Input.GetButton("Sprint"))
@@ -98,7 +106,10 @@ public class ExperimentalPlayerMovement : MonoBehaviour {
         {
             if (contact.normal.y >= at)
                 isGrounded = true;
-
+            if (contact.normal.x > 0 && isGrounded == false)
+                WallJump(1);
+            if (contact.normal.x < 0 && isGrounded == false)
+                WallJump(-1);
         }
     }
 
